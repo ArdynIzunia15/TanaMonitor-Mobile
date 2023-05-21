@@ -37,6 +37,7 @@ public class MonitoringActivity extends AppCompatActivity {
     Slider sliderThreshold;
     MaterialButton btnManualOn, btnApplyThreshold, btnCancelApplyThreshold;
     Integer sliderValue;
+    Boolean isOnline;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private void writeHistory(History history){
         String tempPath = "history/" + String.valueOf(history.getActionType() + "_" + String.valueOf(history.getDateTime()));
@@ -61,6 +62,21 @@ public class MonitoringActivity extends AppCompatActivity {
         ref.child("settings").child("pumpIsOn").setValue(true);
     }
 
+    private void setActivityEnabled(Boolean isOnline, Slider sliderThreshold, TextView txtMoistureValue, MaterialButton btnManualOn, MaterialButton btnApplyThreshold, MaterialButton btnCancelApplyThreshold) {
+        if (!isOnline) {
+            sliderThreshold.setEnabled(false);
+            txtMoistureValue.setText("--");
+            btnManualOn.setEnabled(false);
+            btnApplyThreshold.setEnabled(false);
+            btnCancelApplyThreshold.setEnabled(false);
+        } else {
+            sliderThreshold.setEnabled(true);
+            btnManualOn.setEnabled(true);
+            btnApplyThreshold.setEnabled(true);
+            btnCancelApplyThreshold.setEnabled(true);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,11 +89,33 @@ public class MonitoringActivity extends AppCompatActivity {
         btnApplyThreshold = findViewById(R.id.btnThresholdApply);
         btnCancelApplyThreshold = findViewById(R.id.btnThresholdCancel);
 
+        // Check if esp32 is online
+        mDatabase.child("settings").child("isOnline").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!Boolean.getBoolean(String.valueOf(snapshot.getValue()))){
+                    isOnline = false;
+                    setActivityEnabled(false, sliderThreshold, txtMoistureValue, btnManualOn, btnApplyThreshold, btnCancelApplyThreshold);
+                }
+                else{
+                    isOnline = true;
+                    setActivityEnabled(true, sliderThreshold, txtMoistureValue, btnManualOn, btnApplyThreshold, btnCancelApplyThreshold);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // Database Value Change Listener
         mDatabase.child("moistureData").child("value").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                txtMoistureValue.setText(String.valueOf(snapshot.getValue()) + " %");
+                if(isOnline){
+                    txtMoistureValue.setText(String.valueOf(snapshot.getValue()) + " %");
+                }
             }
 
             @Override
@@ -90,9 +128,6 @@ public class MonitoringActivity extends AppCompatActivity {
         btnManualOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Make History
-                // writeHistory(new History("MANUAL", LocalDateTime.of(LocalDateTime.now().getYear(), LocalDateTime.now().getMonth(), LocalDateTime.now().getDayOfMonth(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute())));
-                // Send data value on to database
                 turnOnPump();
             }
         });

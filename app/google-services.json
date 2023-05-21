@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "878906723085",
+    "firebase_url": "https://esp32-firebase-demo-f6138-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "esp32-firebase-demo-f6138",
+    "storage_bucket": "esp32-firebase-demo-f6138.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878906723085:android:f014462824742f30b0be44",
+        "android_client_info": {
+          "package_name": "com.example.tanamonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878906723085-h01l5ng2h180pndbdgf2nb8l6gahb2uv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsmFR0jBBUowI3YatixdnFlmtI_LAm2eY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878906723085-h01l5ng2h180pndbdgf2nb8l6gahb2uv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

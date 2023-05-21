@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerHistoryItem"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:contentPadding="20dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutHistoryItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iconHistory"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:src="@drawable/baseline_circle_blue_24"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toRightOf="@+id/iconHistory"
+                app:layout_constraintTop_toTopOf="@+id/iconHistory"
+                app:layout_constraintBottom_toBottomOf="@+id/iconHistory">
+                <TextView
+                    android:id="@+id/txtActionType"
+                    android:text="AUTOMATIC DISPENSE"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txtDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="23 Mar 2023"/>
+                    <TextView
+                        android:id="@+id/dividerTimeStamp"
+                        android:text=" - "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/txtTime"
+                        android:text="22:59"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtDuration"
+                android:text="12 hours ago"
+                android:textStyle="italic"
+                android:textColor="@color/gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

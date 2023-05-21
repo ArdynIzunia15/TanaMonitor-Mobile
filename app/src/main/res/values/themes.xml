@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TanaMonitor" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/gray</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
+    </style>
+
+    <style name="Theme.TanaMonitor" parent="Base.Theme.TanaMonitor" />
+</resources>
